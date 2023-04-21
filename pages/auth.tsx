@@ -1,6 +1,7 @@
 import Input from "@/components/Input";
 import Image from "next/image";
 import React, { useCallback, useState } from "react";
+import axios from "axios";
 import netflixLogo from "@/public/images/logo.png";
 
 export default function Auth() {
@@ -13,6 +14,18 @@ export default function Auth() {
     setVariant((currentVariant) =>
       currentVariant === "login" ? "register" : "login"
     );
+  }, []);
+
+  const register = useCallback(async () => {
+    try {
+      await axios.post("/api/register",{
+        email,
+        name,
+        password
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
 
   return (
@@ -28,16 +41,16 @@ export default function Auth() {
               {variant === "login" ? "Sign in" : "Register"}
             </h2>
             <div className="flex flex-col gap-4">
-              {variant=== 'register' && (
-                 <Input
-                label="Username"
-                onChange={(ev: any) => setName(ev.target.value)}
-                id="name"
-                value={name}
-                type="text"
-              />
+              {variant === "register" && (
+                <Input
+                  label="Username"
+                  onChange={(ev: any) => setName(ev.target.value)}
+                  id="name"
+                  value={name}
+                  type="text"
+                />
               )}
-             
+
               <Input
                 label="Email"
                 onChange={(ev: any) => setEmail(ev.target.value)}
@@ -54,17 +67,17 @@ export default function Auth() {
               />
             </div>
             <button className="bg-red-600 rounded-md text-white py-3 w-full mt-10 hover:bg-red-700 transition ">
-              {variant === "login"? "Login" : "Sign Up"}
-             
+              {variant === "login" ? "Login" : "Sign Up"}
             </button>
             <p className="text-neutral-500 mt-12">
-             { variant === "login"? " First time using Netflix ?": "Already have an account ?" }
+              {variant === "login"
+                ? " First time using Netflix ?"
+                : "Already have an account ?"}
               <span
                 onClick={toggleVariant}
                 className=" text-white text-sm ml-1 hover:underline cursor-pointer"
               >
-                
-             {   variant === "register" ? " Login" :"Create an account"}
+                {variant === "register" ? " Login" : "Create an account"}
               </span>
             </p>
           </div>
