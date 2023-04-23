@@ -6,7 +6,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     try {
 
-        if (req.method != 'POST') {
+        if (req.method !== 'POST') {
             return res.status(405).end()//handling a POST request
         }
 
