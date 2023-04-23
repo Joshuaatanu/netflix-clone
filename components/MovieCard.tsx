@@ -1,13 +1,20 @@
 /* eslint-disable @next/next/no-img-element */
-import React from "react";
+import React, { useCallback } from "react";
 import { BsFillPlayFill } from "react-icons/bs";
-import { FavoriteButton } from "./FavoriteButton";
+import { useRouter } from "next/router";
+import FavoriteButton from "./FavoriteButton";
 
 interface MovieCardProps {
   data: Record<string, any>;
 }
 
 export const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
+  const router = useRouter();
+
+  const redirectToWatch = useCallback(
+    () => router.push(`/watch/${data.id}`),
+    [router, data.id]
+  );
   return (
     <div className=" group bg-zinc-900 col-span relative h-[12vw] ">
       <img
@@ -25,6 +32,7 @@ export const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
     h-[12vw]
 
     "
+        onClick={redirectToWatch}
         src={data.thumbnailUrl}
         alt="thumbnail"
       />
@@ -59,6 +67,7 @@ export const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
         w-full
         h-[12vw]
         "
+          onClick={redirectToWatch}
           src={data.thumbnailUrl}
           alt=" thumbnail"
         />
@@ -97,11 +106,11 @@ export const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
                 hover:bg-neutral-300
 
                 "
-              onClick={() => {}}
+              onClick={redirectToWatch}
             >
               <BsFillPlayFill />
             </div>
-              <FavoriteButton movieId={data?.id}/>
+            <FavoriteButton movieId={data?.id} />
           </div>
           <p className="text-green-400 font-semibold mt-4">
             New <span className="text-white">2023</span>
