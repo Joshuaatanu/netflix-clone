@@ -1,4 +1,11 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+# A Netflix Clone made with Next.js, NextAuth.js, Prisma, and TypeScript
+
+Netflix is one of the most popular streaming platforms in the world today, and it has undoubtedly changed the way we consume media. If you've ever wondered how you could create a similar platform, then a Netflix clone made with Next.js, NextAuth.js, Prisma, and TypeScript is an excellent place to start.
+
+
+
+
 
 ## Getting Started
 
